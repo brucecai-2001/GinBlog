@@ -1,0 +1,2 @@
+# GinBlog
+A Go Blog
