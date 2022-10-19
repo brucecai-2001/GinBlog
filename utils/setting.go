@@ -8,13 +8,18 @@ import (
 
 //配置参数
 var (
-	AppMode  string
-	HttpPort string
-	Db       string
-	DbHost   string
-	Dbport   string
-	DbUser   string
-	DbName   string
+	AppMode   string
+	HttpPort  string
+	Db        string
+	DbHost    string
+	Dbport    string
+	DbUser    string
+	DbName    string
+	Jwtkey    string
+	AccessKey string
+	SecretKey string
+	Bucket    string
+	URL       string
 )
 
 func init() {
@@ -29,6 +34,7 @@ func init() {
 func LoadServer(file *ini.File) {
 	AppMode = file.Section("server").Key("Appmode").String()
 	HttpPort = file.Section("server").Key("HttpPort").String()
+	Jwtkey = file.Section("server").Key("JwtKey").String()
 }
 
 func LoadDatabase(file *ini.File) {
@@ -37,4 +43,11 @@ func LoadDatabase(file *ini.File) {
 	Dbport = file.Section("database").Key("Dbport").String()
 	DbUser = file.Section("database").Key("DbUser").String()
 	DbName = file.Section("database").Key("DbName").String()
+}
+
+func LoadQiniu(file *ini.File) {
+	AccessKey = file.Section("FileServer").Key("AccessKey").String()
+	SecretKey = file.Section("FileServer").Key("SecretKey").String()
+	Bucket = file.Section("FileServer").Key("Bucket").String()
+	URL = file.Section("FileServer").Key("URL").String()
 }

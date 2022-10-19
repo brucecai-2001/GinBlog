@@ -14,7 +14,7 @@ var err error
 
 func InitDB() {
 	//连接数据库
-	db, err := gorm.Open(utils.Db, fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
+	db, err = gorm.Open(utils.Db, fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		utils.DbUser,
 		"password",
 		utils.DbHost,
@@ -33,5 +33,6 @@ func InitDB() {
 	db.DB().SetConnMaxLifetime(10 * time.Second)
 
 	//模型迁移
+	db.SingularTable(true)
 	db.AutoMigrate(&User{}, &Category{}, &Article{})
 }
